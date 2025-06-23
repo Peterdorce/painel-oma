@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel OMA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    nav {
+      width: 260px;
+      background: #002b4d;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    nav img {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    nav h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #00c2ff;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+      padding: 8px 10px;
+      border-radius: 4px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover {
+      background-color: #00c2ff;
+      color: #002b4d;
+    }
+    iframe {
+      flex: 1;
+      border: none;
+      width: 100%;
+      height: 100vh;
+    }
+
+    /* Botão hamburger para mobile */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 35px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 1001;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 4px;
+      background: #002b4d;
+      border-radius: 2px;
+    }
+
+    /* Submenu */
+    .submenu-container {
+      position: relative;
+    }
+    .submenu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .submenu {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      padding-left: 10px;
+    }
+    .submenu.open {
+      display: flex;
+    }
+    .submenu a {
+      padding: 6px 10px;
+      font-size: 14px;
+      color: #00c2ff;
+    }
+    .submenu a:hover {
+      background-color: #00c2ff;
+      color: #002b4d;
+    }
+
+    /* RESPONSIVO */
+    @media (max-width: 768px) {
+      body {
+        overflow: hidden;
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 1000;
+        transform: translateX(-100%);
+        box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+      }
+      nav.open {
+        transform: translateX(0);
+      }
+      iframe {
+        height: 100vh;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-toggle" id="menuToggle" aria-label="Abrir menu" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav id="sidebar">
+    <img src="d:\Windows.old.000\Users\Peterson\Google Drive\Imagens\CABEÇALHO OMA.jpg" alt="Logo OMA" />
+    <h2>📂 Painel OMA</h2>
+    <!-- Submenu ferramentas -->
+    <div class="submenu-container">
+      <a href="#" class="submenu-toggle">🛠️ Ferramentas ▼</a>
+      <div class="submenu">
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1qdWEBxVqru1B0UKZ4rPus3pAaIZPueGkNmJZEFFybUU/edit?gid=618047640#gid=618047640')">🛠️ Ferramentas Calibradas</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1qdWEBxVqru1B0UKZ4rPus3pAaIZPueGkNmJZEFFybUU/edit?gid=20885369#gid=20885369&range=A1')">🛠️ Saída e Retorno para Calibração</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1qdWEBxVqru1B0UKZ4rPus3pAaIZPueGkNmJZEFFybUU/edit?gid=36079940#gid=36079940&range=A1:B1')">🛠️ Inventário Geral</a>
+      </div>
+    </div>
+    <!-- Fim submenu ferramentas -->
+    <!-- Submenu funcionários -->
+    <div class="submenu-container">
+      <a href="#" class="submenu-toggle">👥 Funcionários ▼</a>
+      <div class="submenu">
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1xBesHxbs1ratw3c7vytlcFk1puUWmMpSWJM3jSN867A/edit?gid=1618429899#gid=1618429899')">👥 Registro de Funcionários</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1xBesHxbs1ratw3c7vytlcFk1puUWmMpSWJM3jSN867A/edit?gid=694044161#gid=694044161')">🔐 Armários</a>
+      </div>
+    </div>
+    <!-- Fim submenu funcionários -->
+    <!-- Submenu elétrica -->
+    <div class="submenu-container">
+      <a href="#" class="submenu-toggle">👨‍🏫 Treinamentos ▼</a>
+      <div class="submenu">
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Gg_jW-XWrfweeuliU7HmmcjlJa1NWnPWgFOMPyUDf5g/edit?gid=201181906#gid=201181906')">📋 Mapa de Treinamentos</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Gg_jW-XWrfweeuliU7HmmcjlJa1NWnPWgFOMPyUDf5g/edit?gid=1042543638#gid=1042543638')">📝 Sumário Livro ATA</a>
+      </div>
+    </div>
+    <!-- Fim submenu elétrica -->
+    <!-- Submenu Fichas de Inspeção -->
+    <div class="submenu-container">
+      <a href="#" class="submenu-toggle">🗂️ Fichas de Inspeção ▼</a>
+      <div class="submenu">
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Nsnm4GGWXzyuXTRK1xNoaw0PapDQz9EYV6N2Pw4AWbM/edit?gid=1102958907#gid=1102958907')">📁 Fichas de Inspeção Encerradas</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Nsnm4GGWXzyuXTRK1xNoaw0PapDQz9EYV6N2Pw4AWbM/edit?gid=1476640983#gid=1476640983')">🛠️ Aeronaves em Manutenção</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Nsnm4GGWXzyuXTRK1xNoaw0PapDQz9EYV6N2Pw4AWbM/edit?gid=1431163514#gid=1431163514')">✅ Aeronaves Finalizadas</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Nsnm4GGWXzyuXTRK1xNoaw0PapDQz9EYV6N2Pw4AWbM/edit?gid=96625300#gid=96625300')">📄 Rotina CTM</a>
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Nsnm4GGWXzyuXTRK1xNoaw0PapDQz9EYV6N2Pw4AWbM/edit?gid=198564110#gid=198564110')">📦 Material Despachado</a>
+      </div>
+    </div>
+    <!-- Fim submenu Fichas de Inspeção -->
+    <!-- Submenu Qualidade -->
+    <div class="submenu-container">
+      <a href="#" class="submenu-toggle">✅ Qualidade ▼</a>
+      <div class="submenu">
+        <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Axdml1m0UphxkCp4-m2fRnVrp_hmsAXfDe8gvaYgzD8/edit?gid=0#gid=0')">📋 Gestão de Não Conformidades</a>
+        <a href="https://trello.com/invite/b/6797da09eb30f40a9b554527/ATTI0c99f0113dcac94af3e67c049cbe2f1e8F0AC658/operacional-oma" target="_blank" rel="noopener noreferrer">🔄 Alinhamentos Operacionais</a>
+      </div>
+    </div>
+    <!-- Fim submenu Qualidade -->
+    <a href="https://drive.google.com/drive/folders/1PC5TAYsml4BXmTzWgv-zp2lJUi7uwFSe" target="_blank" rel="noopener noreferrer">⚙️ S.G.S.O.</a>
+    <a href="https://www.gov.br/anac/pt-br" target="_blank" rel="noopener noreferrer">🛨 Site ANAC</a>
+    <a href="#" onclick="abrir('https://sistemas.anac.gov.br/aeronaves/cons_rab.asp')">🛩️ RAB ANAC</a>
+    <a href="#" onclick="abrir('https://www.omaaviacao.com.br/manuais')">🔧 Manuais</a>
+    <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1xBesHxbs1ratw3c7vytlcFk1puUWmMpSWJM3jSN867A/edit?usp=sharing')">👥 Registro de Funcionários</a>
+    <a href="#" onclick="abrir('https://docs.google.com/spreadsheets/d/1Gg_jW-XWrfweeuliU7HmmcjlJa1NWnPWgFOMPyUDf5g/edit?usp=sharing')">📚 Registro de Treinamentos</a>
+    <a href="https://lucid.app/lucidchart/c63c1c81-4851-4caf-a0b8-ba0a92f2fdc0/edit?viewport_loc=-579%2C-237%2C4989%2C2445%2C0_0&invitationId=inv_aea96af3-6160-499d-a0c3-6b4a4b41479d" target="_blank" rel="noopener noreferrer">🌐 FLUXOGRAMA O.S. OMA</a>
+    <a href="#" onclick="abrir('file://srv-oma/Dados/OMA/OUTROS/OFICINA%20VISTORIA%20ANAC/SGSO/')">⏱️ Registro de Ponto</a>
+  </nav>
+  <iframe id="conteudo" src="d:\Windows.old.000\Users\Peterson\Google Drive\Imagens\67213754_850594748657294_748511494299189248_o.jpg"></iframe>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+    // Também abrir/fechar menu via teclado (enter/space) no botão
+    menuToggle.addEventListener('keydown', e => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        sidebar.classList.toggle('open');
+      }
+    });
+
+    function abrir(url) {
+      document.getElementById('conteudo').src = url;
+      // Se estiver em mobile, fecha o menu após clicar no link
+      if(window.innerWidth <= 768) {
+        sidebar.classList.remove('open');
+      }
+    }
+
+    // Script para múltiplos submenus
+    document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Fecha outros submenus abertos
+        document.querySelectorAll('.submenu').forEach(function(sub) {
+          if (sub !== toggle.nextElementSibling) {
+            sub.classList.remove('open');
+          }
+        });
+        // Abre/fecha o submenu clicado
+        toggle.nextElementSibling.classList.toggle('open');
+      });
+    });
+
+    // Fecha todos os submenus se clicar fora
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('submenu-toggle') && !e.target.closest('.submenu')) {
+        document.querySelectorAll('.submenu').forEach(function(sub) {
+          sub.classList.remove('open');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+
